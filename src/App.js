@@ -1,26 +1,41 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { Append } from "./pages/Append";
+import { Archive } from "./pages/Archive";
+import { BaseNote } from "./pages/BaseNote";
+import { Detail } from "./pages/Detail";
 
-function App() {
+export const App = () => {
+  const paths = [
+    {
+      path: "/",
+      element: <BaseNote />,
+    },
+    {
+      path: "/archive",
+      element: <Archive />,
+    },
+    {
+      path: "/new",
+      element: <Append />,
+    },
+    {
+      path: "/detail/:id",
+      element: <Detail />,
+    },
+    {
+      path: "/*",
+      element: <>404</>,
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <>
+      <Routes>
+        {paths.map((item, index) => (
+          <Route key={index} {...item} />
+        ))}
+      </Routes>
+    </>
   );
-}
-
-export default App;
+};
