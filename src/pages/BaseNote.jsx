@@ -3,9 +3,9 @@ import { getActiveNotes, deleteNote, archiveNote } from "../utils/local-data";
 import { CardNote } from "../components/CardNote";
 import { SearchNote } from "../components/SearchNotes";
 import { Navbar } from "../components/Navbar";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 import { NotFound } from "../components/NotFound";
+import { AppendNote } from "../components/AppendNote";
 
 export const BaseNote = () => {
   const [data, setData] = useState([]);
@@ -31,8 +31,6 @@ export const BaseNote = () => {
     }
   }, [title]);
 
-  const navigate = useNavigate();
-
   return (
     <div className="m-10 relative">
       <Navbar />
@@ -44,6 +42,7 @@ export const BaseNote = () => {
         {data.length === 0 ? (
           <NotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
         ) : (
+          !!data &&
           data.map((item, index) => (
             <CardNote
               key={index}
@@ -58,21 +57,7 @@ export const BaseNote = () => {
         )}
       </div>
 
-      <div className="relative">
-        <div className="fixed right-10 bottom-10 z-40">
-          <div className="relative group">
-            <button
-              className="w-12 h-12 bg-green-600 hover:bg-green-500 rounded-2xl cursor-pointer"
-              onClick={() => navigate("/new")}
-            >
-              <span className="text-white flex justify-center">
-                <FaPlus />
-              </span>
-            </button>
-            <div className="absolute left-1 top-1 -z-10 rounded-2xl border-2 w-full h-full hidden group-hover:block border-green-600"></div>
-          </div>
-        </div>
-      </div>
+      <AppendNote />
     </div>
   );
 };
