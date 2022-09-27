@@ -13,7 +13,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 export const Archive = () => {
   const archiveNote = getArchivedNotes();
   const [data, setData] = useState(archiveNote);
-  const [statusName, setStatusName] = useState("archived");
+  const [statusName, setStatusName] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const title = searchParams.get("title") || "";
@@ -23,6 +23,7 @@ export const Archive = () => {
   };
 
   useEffect(() => {
+    setStatusName("archived");
     if (!title) {
       setData(getArchivedNotes());
     } else {
@@ -43,7 +44,7 @@ export const Archive = () => {
         title={title}
         setSearchParamsHandler={setSearchParamsHandler}
       />
-      <div className="grid grid-cols-4 gap-5 relative">
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 lg:grid-cols-4 relative">
         {data.length === 0 ? (
           <div className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="flex flex-col items-center">

@@ -1,19 +1,35 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
+import { addNote } from "../utils/local-data";
 
-export const Append = ({
-  newData,
-  maxLengthTitle,
-  maxLengthBody,
-  onTitleChange,
-  onBodyChange,
-  onSubmitNote,
-}) => {
+export const Append = () => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [maxLengthTitle, setMaxLengthTitle] = useState(50);
+  const [maxLengthBody, setMaxLengthBody] = useState(255);
+
+  const navigate = useNavigate();
+
   return (
     <div className="m-10">
       <Navbar />
-      <form onSubmit={onSubmitNote}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          addNote({
+            title: title,
+            body: body,
+          });
+          navigate("/");
+          setTitle("");
+          setBody("");
+          setMaxLengthTitle(50);
+          setMaxLengthBody(255);
+        }}
+      >
         <div className="my-5">
-          <p className="flex mr-3 justify-end text-white">
+          <p className="flex mr-3 justify-end">
             remaining characters: {maxLengthTitle}
           </p>
           <input
@@ -21,14 +37,17 @@ export const Append = ({
             type="text"
             name="title"
             placeholder="input your note title.."
-            value=""
-            onChange={(event) => onTitleChange(event.target.value)}
+            value={title}
+            onChange={(event) => {
+              setMaxLengthTitle(50 - event.target.value.slice(0, 50).length);
+              setTitle(event.target.value.slice(0, 50));
+            }}
             required
           />
         </div>
 
         <div>
-          <p className="flex justify-end text-white">
+          <p className="flex justify-end">
             remaining characters: {maxLengthBody}
           </p>
           <textarea
@@ -36,8 +55,11 @@ export const Append = ({
             typeof="text"
             name="body"
             placeholder="input your note body.."
-            value=""
-            onChange={(event) => onBodyChange(event.target.value)}
+            value={body}
+            onChange={(event) => {
+              setMaxLengthBody(255 - event.target.value.slice(0, 255).length);
+              setBody(event.target.value.slice(0, 255));
+            }}
             required
           />
         </div>

@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const BaseNote = () => {
   const [data, setData] = useState([]);
-  const [statusName, setStatusName] = useState("note");
+  const [statusName, setStatusName] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const title = searchParams.get("title") || "";
@@ -18,6 +18,7 @@ export const BaseNote = () => {
   };
 
   useEffect(() => {
+    setStatusName("note");
     if (!title) {
       setData(getActiveNotes());
     } else {
