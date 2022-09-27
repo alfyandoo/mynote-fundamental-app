@@ -8,24 +8,41 @@ import {
   getArchivedNotes,
   unarchiveNote,
 } from "../utils/local-data";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const Archive = () => {
   const archiveNote = getArchivedNotes();
   const [data, setData] = useState(archiveNote);
-
   const [statusName, setStatusName] = useState("archived");
-  
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const title = searchParams.get("title") || "";
+
+  const setSearchParamsHandler = (title) => {
+    setSearchParams({ title });
+  };
+
   useEffect(() => {
-    setData(getArchivedNotes());
-  }, []);
+    if (!title) {
+      setData(getArchivedNotes());
+    } else {
+      setData(
+        getArchivedNotes().filter((note) =>
+          note.title.toLowerCase().includes(title.toLowerCase())
+        )
+      );
+    }
+  }, [title]);
 
   const navigate = useNavigate();
 
   return (
     <div className="m-10 relative">
       <Navbar />
-      <SearchNote />
+      <SearchNote
+        title={title}
+        setSearchParamsHandler={setSearchParamsHandler}
+      />
       <div className="grid grid-cols-4 gap-5 relative">
         {data.length === 0 ? (
           <div className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

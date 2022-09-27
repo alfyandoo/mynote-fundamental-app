@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SearchNote = ({ search, onSearch }) => {
+export const SearchNote = ({ title, setSearchParamsHandler }) => {
   return (
     <>
       <div className="w-full my-5">
@@ -10,8 +10,8 @@ export const SearchNote = ({ search, onSearch }) => {
             className="w-full text-xl p-3 rounded-md border-2 border-violet-200"
             placeholder="Search by title.."
             name="search"
-            value={search}
-            onChange={(event) => onSearch(event.target.value)}
+            value={title}
+            onChange={(event) => setSearchParamsHandler(event.target.value)}
             maxLength={50}
           />
         </form>

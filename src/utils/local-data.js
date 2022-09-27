@@ -84,7 +84,6 @@ const archiveNote = (id) => {
     if (note.id === id) {
       return { ...note, archived: true };
     }
-    console.log(note);
     return note;
   });
 };
