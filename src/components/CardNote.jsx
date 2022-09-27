@@ -2,6 +2,7 @@ import React from "react";
 import { showFormattedDate } from "../utils/index";
 import { DeleteNote } from "./DeleteNote";
 import { useNavigate } from "react-router-dom";
+import { FaFolderOpen, FaFolder } from "react-icons/fa";
 
 export const CardNote = ({
   note,
@@ -40,11 +41,11 @@ export const CardNote = ({
           <button
             className={`border-none text-white text-base rounded-md mt-5 px-5 py-2 ${
               statusName === "note"
-                ? "bg-blue-600 hover:bg-blue-300 hover:text-gray-500"
-                : "bg-orange-400 hover:bg-orange-300 hover:text-gray-500"
+                ? "bg-blue-600 hover:bg-gray-500 hover:text-yellow-400"
+                : "bg-orange-400 hover:bg-gray-500 hover:text-yellow-400"
             }`}
-            onClick={(e) => {
-              e.stopPropagation();
+            onClick={(event) => {
+              event.stopPropagation();
               if (statusName === "note") {
                 onChangeArchiveStatus(id);
                 setData(getActiveNotes);
@@ -54,7 +55,19 @@ export const CardNote = ({
               }
             }}
           >
-            <span>{statusName === "note" ? "Set Archive" : "Set Note"}</span>
+            <span className="flex justify-center items-center">
+              {statusName === "note" ? (
+                <>
+                  <FaFolder />
+                  <span className="px-2">Archive</span>
+                </>
+              ) : (
+                <>
+                  <FaFolderOpen />
+                  <span className="px-2">Unarchive</span>
+                </>
+              )}
+            </span>
           </button>
         </div>
         <div className="absolute border-2 border-violet-500 rounded-xl z-10 w-full h-full top-2 left-2 hidden group-hover:block"></div>

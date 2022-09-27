@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { PageNotFound } from "./components/PageNotFound";
 import { Append } from "./pages/Append";
 import { Archive } from "./pages/Archive";
 import { BaseNote } from "./pages/BaseNote";
@@ -25,7 +26,7 @@ export const App = () => {
     },
     {
       path: "/*",
-      element: <>404</>,
+      element: <PageNotFound />,
     },
   ];
 

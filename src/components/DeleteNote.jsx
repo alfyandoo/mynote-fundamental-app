@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTrash } from "react-icons/fa";
 
 export const DeleteNote = ({
   id,
@@ -8,13 +9,12 @@ export const DeleteNote = ({
   getArchivedNotes,
   statusName,
 }) => {
-  console.log(id);
   return (
     <>
       <button
-        className="w-6 absolute box-border m-3 top-4 right-2 rounded-md group bg-red-400 hover:bg-gray-500"
-        onClick={(e) => {
-          e.stopPropagation();
+        className="absolute px-3 py-2 m-3 top-4 right-2 rounded-md group text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400"
+        onClick={(event) => {
+          event.stopPropagation();
           if (statusName === "note") {
             onDelete(id);
             setData(getActiveNotes);
@@ -24,7 +24,7 @@ export const DeleteNote = ({
           }
         }}
       >
-        <span className="text-white group-hover:text-yellow-400">X</span>
+        <FaTrash />
       </button>
     </>
   );
