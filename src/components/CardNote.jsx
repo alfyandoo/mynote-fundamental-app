@@ -3,6 +3,7 @@ import { showFormattedDate } from "../utils/index";
 import { DeleteNote } from "./DeleteNote";
 import { useNavigate } from "react-router-dom";
 import { FaFolderOpen, FaFolder } from "react-icons/fa";
+import PropType from "prop-types";
 
 export const CardNote = ({
   note,
@@ -74,4 +75,14 @@ export const CardNote = ({
       </div>
     </>
   );
+};
+
+CardNote.PropType = {
+  note: PropType.object.isRequired,
+  statusName: PropType.string.isRequired,
+  onDelete: PropType.func.isRequired,
+  onChangeArchiveStatus: PropType.func.isRequired,
+  setData: PropType.func.isRequired,
+  getActiveNotes: PropType.func,
+  getArchivedNotes: PropType.func,
 };

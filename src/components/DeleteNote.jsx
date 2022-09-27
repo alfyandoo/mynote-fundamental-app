@@ -1,5 +1,6 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
+import PropType from "prop-types";
 
 export const DeleteNote = ({
   id,
@@ -28,4 +29,13 @@ export const DeleteNote = ({
       </button>
     </>
   );
+};
+
+DeleteNote.propTypes = {
+  id: PropType.string.isRequired,
+  onDelete: PropType.func.isRequired,
+  setData: PropType.func.isRequired,
+  getActiveNotes: PropType.func,
+  getArchivedNotes: PropType.func,
+  statusName: PropType.string.isRequired,
 };

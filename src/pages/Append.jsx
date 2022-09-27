@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
 import { addNote } from "../utils/local-data";
@@ -66,7 +66,9 @@ export const Append = () => {
         </div>
 
         <button className="my-5 p-4 rounded-md group text-white bg-violet-600 hover:bg-gray-600">
-          <span className="flex items-center text-white group-hover:text-yellow-400"><FaPlus className="mr-2" /> Add</span>
+          <span className="flex items-center text-white group-hover:text-yellow-400">
+            <FaPlus className="mr-2" /> Add
+          </span>
         </button>
       </form>
     </div>
