@@ -3,6 +3,7 @@ import { showFormattedDate } from "../utils/index";
 import { DeleteNote } from "./DeleteNote";
 import { useNavigate } from "react-router-dom";
 import { FaFolderOpen, FaFolder } from "react-icons/fa";
+import parser from "html-react-parser";
 import PropType from "prop-types";
 
 export const CardNote = ({
@@ -38,7 +39,7 @@ export const CardNote = ({
           <p className="flex my-2 self-end text-yellow-700">
             {showFormattedDate(createdAt)}
           </p>
-          <p className="text-justify">{body}</p>
+          <p className="text-justify">{parser(body)}</p>
           <button
             className={`border-none text-white text-base rounded-md mt-5 px-5 py-2 ${
               statusName === "note"

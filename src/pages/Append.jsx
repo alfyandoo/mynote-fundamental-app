@@ -7,8 +7,6 @@ import { FaPlus } from "react-icons/fa";
 export const Append = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [maxLengthTitle, setMaxLengthTitle] = useState(50);
-  const [maxLengthBody, setMaxLengthBody] = useState(255);
 
   const navigate = useNavigate();
 
@@ -25,43 +23,28 @@ export const Append = () => {
           navigate("/");
           setTitle("");
           setBody("");
-          setMaxLengthTitle(50);
-          setMaxLengthBody(255);
         }}
       >
         <div className="my-5">
-          <p className="flex mr-3 justify-end">
-            remaining characters: {maxLengthTitle}
-          </p>
           <input
             className="w-full text-xl p-3 rounded-md border-2 border-violet-200"
             type="text"
             name="title"
             placeholder="input your note title.."
             value={title}
-            onChange={(event) => {
-              setMaxLengthTitle(50 - event.target.value.slice(0, 50).length);
-              setTitle(event.target.value.slice(0, 50));
-            }}
+            onChange={(event) => setTitle(event.target.value)}
             required
           />
         </div>
 
         <div>
-          <p className="flex justify-end">
-            remaining characters: {maxLengthBody}
-          </p>
-          <textarea
+          <div
             className="w-full h-64 p-3 rounded-md border-2 border-violet-200"
-            typeof="text"
-            name="body"
-            placeholder="input your note body.."
-            value={body}
-            onChange={(event) => {
-              setMaxLengthBody(255 - event.target.value.slice(0, 255).length);
-              setBody(event.target.value.slice(0, 255));
+            placeholder="input input your note body.."
+            contentEditable
+            onInput={(event) => {
+              setBody(event.target.innerText);
             }}
-            required
           />
         </div>
 

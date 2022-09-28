@@ -1,7 +1,7 @@
 import React from "react";
 import PropType from "prop-types";
 
-export const NotFound = ({ className }) => {
+export const NoteNotFound = ({ className }) => {
   return (
     <div className={className}>
       <div className="flex flex-col items-center">
@@ -12,6 +12,6 @@ export const NotFound = ({ className }) => {
   );
 };
 
-NotFound.PropType = {
+NoteNotFound.PropType = {
   className: PropType.string,
 };

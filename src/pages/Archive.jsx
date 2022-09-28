@@ -8,7 +8,7 @@ import {
   unarchiveNote,
 } from "../utils/local-data";
 import { useSearchParams } from "react-router-dom";
-import { NotFound } from "../components/NotFound";
+import { NoteNotFound } from "../components/NoteNotFound";
 import { AppendNote } from "../components/AppendNote";
 
 export const Archive = () => {
@@ -45,7 +45,7 @@ export const Archive = () => {
       />
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 lg:grid-cols-4 relative">
         {data.length === 0 ? (
-          <NotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+          <NoteNotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
         ) : (
           !!data &&
           data.map((item, index) => (
