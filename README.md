@@ -1,3 +1,7 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/af4946d2-d1bd-4a09-8d3d-abad2192f5c4/deploy-status)](https://app.netlify.com/sites/mynote-fundamental/deploys)
+
+https://mynote-fundamental.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
