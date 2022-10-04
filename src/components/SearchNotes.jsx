@@ -1,5 +1,5 @@
 import React from "react";
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 
 export const SearchNote = ({ title, setSearchParamsHandler }) => {
   return (
@@ -20,6 +20,6 @@ export const SearchNote = ({ title, setSearchParamsHandler }) => {
 };
 
 SearchNote.propTypes = {
-  title: PropType.string.isRequired,
-  setSearchParamsHandler: PropType.func.isRequired,
+  title: PropTypes.string.isRequired,
+  setSearchParamsHandler: PropTypes.func.isRequired,
 };

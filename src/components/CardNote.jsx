@@ -4,7 +4,7 @@ import { DeleteNote } from "./DeleteNote";
 import { useNavigate } from "react-router-dom";
 import { FaFolderOpen, FaFolder } from "react-icons/fa";
 import parser from "html-react-parser";
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 
 export const CardNote = ({
   note,
@@ -78,12 +78,12 @@ export const CardNote = ({
   );
 };
 
-CardNote.PropType = {
-  note: PropType.object.isRequired,
-  statusName: PropType.string.isRequired,
-  onDelete: PropType.func.isRequired,
-  onChangeArchiveStatus: PropType.func.isRequired,
-  setData: PropType.func.isRequired,
-  getActiveNotes: PropType.func,
-  getArchivedNotes: PropType.func,
+CardNote.propTypes = {
+  note: PropTypes.object.isRequired,
+  statusName: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onChangeArchiveStatus: PropTypes.func.isRequired,
+  setData: PropTypes.func.isRequired,
+  getActiveNotes: PropTypes.func,
+  getArchivedNotes: PropTypes.func,
 };

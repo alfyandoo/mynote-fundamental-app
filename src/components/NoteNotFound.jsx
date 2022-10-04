@@ -1,5 +1,5 @@
 import React from "react";
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 
 export const NoteNotFound = ({ className }) => {
   return (
@@ -12,6 +12,6 @@ export const NoteNotFound = ({ className }) => {
   );
 };
 
-NoteNotFound.PropType = {
-  className: PropType.string,
+NoteNotFound.propTypes = {
+  className: PropTypes.string,
 };
