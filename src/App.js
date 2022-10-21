@@ -5,12 +5,22 @@ import { Append } from "./pages/Append";
 import { Archive } from "./pages/Archive";
 import { BaseNote } from "./pages/BaseNote";
 import { Detail } from "./pages/Detail";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 export const App = () => {
   const paths = [
     {
       path: "/",
       element: <BaseNote />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
     },
     {
       path: "/archive",
