@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getActiveNotes, deleteNote, archiveNote } from "../utils/local-data";
+import { deleteNote, archiveNote } from "../utils/local-data";
 import { CardNote } from "../components/CardNote";
 import { SearchNote } from "../components/SearchNotes";
-import { Navbar } from "../components/Navbar";
 import { useSearchParams } from "react-router-dom";
 import { NoteNotFound } from "../components/NoteNotFound";
 import { AppendNote } from "../components/AppendNote";
+import { getActiveNotes } from "../utils/network-data";
 
 export const BaseNote = () => {
   const [data, setData] = useState([]);
@@ -20,20 +20,24 @@ export const BaseNote = () => {
 
   useEffect(() => {
     setStatusName("note");
+    handleGetActiveNotes()
     if (!title) {
-      setData(getActiveNotes());
+      setData(data);
     } else {
       setData(
-        getActiveNotes().filter((note) =>
+        data.filter((note) =>
           note.title.toLowerCase().includes(title.toLowerCase())
         )
       );
     }
   }, [title]);
 
+  const handleGetActiveNotes = async () => {
+    const { error, data, message} = await getActiveNotes();
+  }
+
   return (
-    <div className="m-10 relative">
-      <Navbar />
+    <div className="mx-10 relative">
       <SearchNote
         title={title}
         setSearchParamsHandler={setSearchParamsHandler}

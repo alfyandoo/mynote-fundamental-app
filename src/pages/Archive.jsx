@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { CardNote } from "../components/CardNote";
-import { Navbar } from "../components/Navbar";
 import { SearchNote } from "../components/SearchNotes";
 import {
   deleteNote,
@@ -37,8 +36,7 @@ export const Archive = () => {
   }, [title]);
 
   return (
-    <div className="m-10 relative">
-      <Navbar />
+    <div className="mx-10 relative">
       <SearchNote
         title={title}
         setSearchParamsHandler={setSearchParamsHandler}

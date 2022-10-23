@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
 import { addNote } from "../utils/local-data";
 import { FaPlus } from "react-icons/fa";
 
@@ -12,7 +11,6 @@ export const Append = () => {
 
   return (
     <div className="mx-10 mt-0">
-      <Navbar />
       <form
         onSubmit={(event) => {
           event.preventDefault();

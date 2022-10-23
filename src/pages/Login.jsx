@@ -1,16 +1,20 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import { useInput } from "../hooks/useInput";
-import { login } from "../utils/network-data";
+import { login, putAccessToken } from "../utils/network-data";
 
 export const Login = () => {
   const [email, setEmail] = useInput("");
   const [password, setPassword] = useInput("");
   const navigate = useNavigate();
+  const { setAuthUser } = useContext(AuthContext);
 
   const signIn = async (user) => {
-    const { error } = await login(user);
-
+    const { error, data } = await login(user);
     if (!error) {
+      putAccessToken(data.accessToken);
+      setAuthUser(data);
       navigate("/");
     }
   };
