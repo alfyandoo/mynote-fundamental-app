@@ -6,10 +6,12 @@ import { useSearchParams } from "react-router-dom";
 import { NoteNotFound } from "../components/NoteNotFound";
 import { AppendNote } from "../components/AppendNote";
 import { getActiveNotes } from "../utils/network-data";
+import { Loading } from "../components/Loading";
 
 export const BaseNote = () => {
   const [data, setData] = useState([]);
   const [statusName, setStatusName] = useState("");
+  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const title = searchParams.get("title") || "";
@@ -20,7 +22,7 @@ export const BaseNote = () => {
 
   useEffect(() => {
     setStatusName("note");
-    handleGetActiveNotes()
+    handleGetActiveNotes();
     if (!title) {
       setData(data);
     } else {
@@ -33,35 +35,50 @@ export const BaseNote = () => {
   }, [title]);
 
   const handleGetActiveNotes = async () => {
-    const { error, data, message} = await getActiveNotes();
-  }
+    try {
+      setLoading(true);
+      const { error, data } = await getActiveNotes();
+      if (!error) {
+        setData(data);
+      }
+    } catch (error) {
+      throw new Error(`Error: ${error}`);
+    }
+    setLoading(false);
+  };
 
   return (
-    <div className="mx-10 relative">
-      <SearchNote
-        title={title}
-        setSearchParamsHandler={setSearchParamsHandler}
-      />
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 lg:grid-cols-4 relative">
-        {data.length === 0 ? (
-          <NoteNotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-        ) : (
-          !!data &&
-          data.map((item, index) => (
-            <CardNote
-              key={index}
-              note={item}
-              statusName={statusName}
-              onChangeArchiveStatus={archiveNote}
-              onDelete={deleteNote}
-              setData={setData}
-              getActiveNotes={getActiveNotes}
-            />
-          ))
-        )}
-      </div>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="mx-10 relative">
+          <SearchNote
+            title={title}
+            setSearchParamsHandler={setSearchParamsHandler}
+          />
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 lg:grid-cols-4 relative">
+            {data.length === 0 ? (
+              <NoteNotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+            ) : (
+              !!data &&
+              data.map((item, index) => (
+                <CardNote
+                  key={index}
+                  note={item}
+                  statusName={statusName}
+                  onChangeArchiveStatus={archiveNote}
+                  onDelete={deleteNote}
+                  setData={setData}
+                  getActiveNotes={getActiveNotes}
+                />
+              ))
+            )}
+          </div>
 
-      <AppendNote />
-    </div>
+          <AppendNote />
+        </div>
+      )}
+    </>
   );
 };

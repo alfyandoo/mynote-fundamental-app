@@ -22,3 +22,7 @@ code {
     @apply absolute text-slate-400;
   }
 }
+
+.animate-spin {
+  animation: spin 0.2s linear infinite !important;
+}
