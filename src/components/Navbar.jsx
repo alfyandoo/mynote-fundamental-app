@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import { LocalizationContext } from "../contexts/LocalizationContext";
+import { useLocalization } from "../hooks/useLocalization";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export const Navbar = () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
+  const { localization, toggleLocalization } = useContext(LocalizationContext);
+  const text = useLocalization("nav");
   const navigate = useNavigate();
 
   const logout = () => {
@@ -24,20 +29,23 @@ export const Navbar = () => {
               to={"/"}
               className="py-4 px-4 hover:bg-violet-600 hover:text-white rounded-md"
             >
-              Home
+              {text.home}
             </Link>
             <Link
               to={"/archive"}
               className="py-4 px-4 hover:bg-violet-600 hover:text-white rounded-md"
             >
-              Archive
+              {text.archive}
             </Link>
           </>
         )}
 
         <div>
-          <button>ID</button>
-          <button>Theme</button>
+          <button onClick={toggleLocalization} className="mx-3">
+            {localization === "id" ? "ID" : "EN"}
+          </button>
+
+          <button className="mx-3">Theme</button>
           <button onClick={() => logout()}>Account</button>
         </div>
       </div>
