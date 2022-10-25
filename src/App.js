@@ -5,10 +5,12 @@ import { AuthContext } from "./contexts/AuthContext";
 import { getUserLogged } from "./utils/network-data";
 import { paths } from "./routes/paths";
 import { LocalizationContext } from "./contexts/LocalizationContext";
+import { ThemeContext } from "./contexts/ThemeContext";
 
 export const App = () => {
   const [authUser, setAuthUser] = useState(null);
   const [localization, setLocalization] = useState("id");
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     initialDataUser();
@@ -24,6 +26,11 @@ export const App = () => {
   const toggleLocalization = () => {
     localStorage.setItem("localization", localization === "en" ? "id" : "en");
     setLocalization((prevState) => (prevState === "en" ? "id" : "en"));
+  };
+
+  const toggleTheme = () => {
+    localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
+    setTheme((prevState) => (prevState === "dark" ? "light" : "dark"));
   };
 
   const authContextValue = useMemo(
@@ -42,19 +49,30 @@ export const App = () => {
     [localization]
   );
 
+  const themeContextValue = useMemo(
+    () => ({
+      theme,
+      toggleTheme,
+    }),
+
+    [theme]
+  );
+
   return (
     <AuthContext.Provider value={authContextValue}>
       <LocalizationContext.Provider value={localizationContextValue}>
-        <header>
-          <Navbar />
-        </header>
-        <main>
-          <Routes>
-            {paths.map((item, index) => (
-              <Route key={index} {...item} />
-            ))}
-          </Routes>
-        </main>
+        <ThemeContext.Provider value={themeContextValue}>
+          <header>
+            <Navbar />
+          </header>
+          <main>
+            <Routes>
+              {paths.map((item, index) => (
+                <Route key={index} {...item} />
+              ))}
+            </Routes>
+          </main>
+        </ThemeContext.Provider>
       </LocalizationContext.Provider>
     </AuthContext.Provider>
   );
