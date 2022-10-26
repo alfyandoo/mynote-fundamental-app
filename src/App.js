@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
@@ -9,8 +10,10 @@ import { ThemeContext } from "./contexts/ThemeContext";
 
 export const App = () => {
   const [authUser, setAuthUser] = useState(null);
-  const [localization, setLocalization] = useState("id");
-  const [theme, setTheme] = useState("light");
+  const [localization, setLocalization] = useState(
+    localStorage.getItem("localization") || "id"
+  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
     initialDataUser();

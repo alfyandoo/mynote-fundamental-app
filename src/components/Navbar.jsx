@@ -22,7 +22,7 @@ export const Navbar = () => {
   return (
     <div className={`${theme === "dark" ? "dark" : ""}`}>
       <div className="mx-10 pb-3 flex justify-between items-center dark:bg-primary-dark">
-        <h1 className="text-3xl my-10 text-center font-extrabold text-violet-600 dark:text-text-primary-dark">
+        <h1 className="text-3xl my-10 text-center font-extrabold text-violet-600">
           My Note App
         </h1>
 
@@ -31,13 +31,13 @@ export const Navbar = () => {
             <>
               <Link
                 to={"/"}
-                className="py-4 px-4 hover:bg-violet-600 hover:text-white rounded-md"
+                className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
               >
                 {text.home}
               </Link>
               <Link
                 to={"/archive"}
-                className="py-4 px-4 hover:bg-violet-600 hover:text-white rounded-md"
+                className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
               >
                 {text.archive}
               </Link>
@@ -45,11 +45,11 @@ export const Navbar = () => {
           )}
 
           <div>
-            <button onClick={toggleLocalization} className="mx-3">
+            <button onClick={toggleLocalization} className="mx-3 dark:text-white">
               {localization === "id" ? "ID" : "EN"}
             </button>
 
-            <button onClick={toggleTheme} className="mx-3">
+            <button onClick={toggleTheme} className="mx-3 dark:text-white">
               {theme === "light" ? "LIGHT" : "DARK"}
             </button>
 
