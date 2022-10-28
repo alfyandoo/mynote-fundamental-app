@@ -20,66 +20,65 @@ export const Navbar = () => {
     navigate("/");
   };
   return (
-    
-      <div className="px-10 flex justify-between items-center dark:bg-primary-dark">
-        <h1 className="text-3xl my-10 text-center font-extrabold text-violet-600 dark:text-white">
-          My Note App
-        </h1>
+    <div className="px-10 flex justify-between items-center dark:bg-primary-dark">
+      <h1 className="text-3xl my-10 text-center font-extrabold text-violet-600 dark:text-white">
+        My Note App
+      </h1>
 
-        <div className="flex items-center">
-          {authUser && (
-            <>
-              <Link
-                to={"/"}
-                className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
-              >
-                {text.home}
-              </Link>
-              <Link
-                to={"/archive"}
-                className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
-              >
-                {text.archive}
-              </Link>
-            </>
-          )}
+      <div className="flex items-center">
+        {authUser && (
+          <>
+            <Link
+              to={"/"}
+              className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
+            >
+              {text.home}
+            </Link>
+            <Link
+              to={"/archive"}
+              className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
+            >
+              {text.archive}
+            </Link>
+          </>
+        )}
 
-          <div>
-            <button onClick={toggleLocalization} className="dark:text-white">
+        <div>
+          <button onClick={toggleLocalization} className="dark:text-white">
+            <img
+              src="/images/translate.png"
+              alt="translate"
+              className="w-12 h-12 self-center hover:scale-95"
+            />
+          </button>
+
+          <button onClick={toggleTheme} className="mx-3 dark:text-white">
+            {theme === "light" ? (
               <img
-                src="/images/translate.png"
+                src="/images/sun.png"
+                alt="translate"
+                className="w-12 h-12 self-center hover:scale-95"
+              />
+            ) : (
+              <img
+                src="/images/moon.png"
+                alt="translate"
+                className="w-12 h-12 self-center hover:scale-95"
+              />
+            )}
+          </button>
+
+          {authUser && (
+            <button onClick={() => logout()}>
+              <img
+                src="/images/log.png"
                 alt="translate"
                 className="w-12 h-12 self-center hover:scale-95"
               />
             </button>
-
-            <button onClick={toggleTheme} className="mx-3 dark:text-white">
-              {theme === "light" ? (
-                <img
-                  src="/images/sun.png"
-                  alt="translate"
-                  className="w-12 h-12 self-center hover:scale-95"
-                />
-              ) : (
-                <img
-                  src="/images/moon.png"
-                  alt="translate"
-                  className="w-12 h-12 self-center hover:scale-95"
-                />
-              )}
-            </button>
-
-            {authUser && (
-              <button onClick={() => logout()}>
-                <img
-                  src="/images/log.png"
-                  alt="translate"
-                  className="w-12 h-12 self-center hover:scale-95"
-                />
-              </button>
-            )}
-          </div>
+          )}
         </div>
       </div>
+    </div>
   );
 };

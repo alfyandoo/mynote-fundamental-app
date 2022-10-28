@@ -31,7 +31,7 @@ export const BaseNote = () => {
     if (initialData) {
       let tempData = [...data];
       if (!title) {
-        handleGetActiveNotes()
+        handleGetActiveNotes();
       } else {
         setData(
           tempData.filter((note) =>
@@ -57,7 +57,7 @@ export const BaseNote = () => {
   };
 
   return (
-    <div className="mx-10 relative">
+    <div className="px-10 relative dark:bg-primary-dark">
       <SearchNote
         title={title}
         setSearchParamsHandler={setSearchParamsHandler}

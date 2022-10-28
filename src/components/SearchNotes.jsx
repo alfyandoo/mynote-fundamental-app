@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const SearchNote = ({ title, setSearchParamsHandler }) => {
   return (
     <>
-      <div className="w-full my-5">
+      <div className="w-full mb-5">
         <input
           type="search"
           className="w-full text-xl p-3 rounded-md border-2 border-violet-200"

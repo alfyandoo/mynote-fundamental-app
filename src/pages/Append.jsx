@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addNote } from "../utils/local-data";
+import { addNote } from "../utils/network-data";
 import { FaPlus } from "react-icons/fa";
+import { useInput } from "../hooks/useInput";
 
 export const Append = () => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useInput("");
   const [body, setBody] = useState("");
 
   const navigate = useNavigate();
+
+  const handleAddNote = async (note) => {
+    try {
+      console.log(note);
+      const { error } = await addNote(note);
+
+      if (!error) {
+        navigate("/");
+      }
+    } catch (error) {
+      throw new Error(`Error: ${error}`);
+    }
+  };
 
   return (
     <div className="mx-10 mt-0">
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          addNote({
+          handleAddNote({
             title: title,
             body: body,
           });
-          navigate("/");
           setTitle("");
           setBody("");
         }}
@@ -30,7 +43,7 @@ export const Append = () => {
             name="title"
             placeholder="input your note title.."
             value={title}
-            onChange={(event) => setTitle(event.target.value)}
+            onChange={setTitle}
             required
           />
         </div>
