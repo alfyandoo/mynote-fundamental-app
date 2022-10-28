@@ -34,7 +34,7 @@ export const App = () => {
   const toggleTheme = () => {
     localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
     setTheme((prevState) => (prevState === "dark" ? "light" : "dark"));
-    if (theme === "light") document.body.classList.remove("dark");
+    if (theme === "dark") document.body.classList.remove("dark");
     else document.body.classList.add("dark");
   };
 
