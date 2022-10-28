@@ -1,15 +1,22 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { deleteNote } from "../utils/network-data";
 
 export const DeleteNote = ({
   id,
-  onDelete,
-  setData,
   getActiveNotes,
   getArchivedNotes,
   statusName,
 }) => {
+  const handleDeleteNote = async (id) => {
+    try {
+      await deleteNote(id);
+    } catch (error) {
+      throw new Error(`Error: ${error}`);
+    }
+  };
+
   return (
     <>
       <button
@@ -17,11 +24,11 @@ export const DeleteNote = ({
         onClick={(event) => {
           event.stopPropagation();
           if (statusName === "note") {
-            onDelete(id);
-            setData(getActiveNotes);
+            handleDeleteNote(id);
+            getActiveNotes();
           } else {
-            onDelete(id);
-            setData(getArchivedNotes);
+            handleDeleteNote(id);
+            getArchivedNotes();
           }
         }}
       >

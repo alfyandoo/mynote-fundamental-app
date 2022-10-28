@@ -20,10 +20,10 @@ export const CardNote = ({
   getArchivedNotes,
 }) => {
   const { id, title, body, createdAt } = note;
-  const { localization } = useContext(LocalizationContext)
+  const { localization } = useContext(LocalizationContext);
   const navigate = useNavigate();
-  const text = useLocalization('card');
-  const language = localization === 'en' ? 'en-US' : 'id-ID';
+  const text = useLocalization("card");
+  const language = localization === "en" ? "en-US" : "id-ID";
 
   const handleArchiveNote = async (id) => {
     try {
