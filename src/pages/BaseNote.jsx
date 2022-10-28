@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { deleteNote, archiveNote } from "../utils/local-data";
 import { CardNote } from "../components/CardNote";
@@ -10,27 +11,34 @@ import { Loading } from "../components/Loading";
 
 export const BaseNote = () => {
   const [data, setData] = useState([]);
+  const [initialData, setInitialData] = useState(false);
   const [statusName, setStatusName] = useState("");
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  console.log(data);
   const title = searchParams.get("title") || "";
-
+  console.log(title);
   const setSearchParamsHandler = (title) => {
     setSearchParams({ title });
   };
 
   useEffect(() => {
     setStatusName("note");
-    handleGetActiveNotes();
-    if (!title) {
-      setData(data);
-    } else {
-      setData(
-        data.filter((note) =>
-          note.title.toLowerCase().includes(title.toLowerCase())
-        )
-      );
+    if (!initialData) {
+      handleGetActiveNotes();
+    }
+
+    if (initialData) {
+      let tempData = [...data];
+      if (!title) {
+        handleGetActiveNotes()
+      } else {
+        setData(
+          tempData.filter((note) =>
+            note.title.toLowerCase().includes(title.toLowerCase())
+          )
+        );
+      }
     }
   }, [title]);
 
@@ -40,6 +48,7 @@ export const BaseNote = () => {
       const { error, data } = await getActiveNotes();
       if (!error) {
         setData(data);
+        setInitialData(true);
       }
     } catch (error) {
       throw new Error(`Error: ${error}`);
@@ -48,37 +57,35 @@ export const BaseNote = () => {
   };
 
   return (
-    <>
+    <div className="mx-10 relative">
+      <SearchNote
+        title={title}
+        setSearchParamsHandler={setSearchParamsHandler}
+      />
       {loading ? (
         <Loading />
       ) : (
-        <div className="mx-10 relative">
-          <SearchNote
-            title={title}
-            setSearchParamsHandler={setSearchParamsHandler}
-          />
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 lg:grid-cols-4 relative">
-            {data.length === 0 ? (
-              <NoteNotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-            ) : (
-              !!data &&
-              data.map((item, index) => (
-                <CardNote
-                  key={index}
-                  note={item}
-                  statusName={statusName}
-                  onChangeArchiveStatus={archiveNote}
-                  onDelete={deleteNote}
-                  setData={setData}
-                  getActiveNotes={getActiveNotes}
-                />
-              ))
-            )}
-          </div>
-
-          <AppendNote />
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 lg:grid-cols-4 relative">
+          {data.length === 0 ? (
+            <NoteNotFound className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+          ) : (
+            !!data &&
+            data.map((item, index) => (
+              <CardNote
+                key={index}
+                note={item}
+                statusName={statusName}
+                onChangeArchiveStatus={archiveNote}
+                onDelete={deleteNote}
+                setData={setData}
+                getActiveNotes={handleGetActiveNotes}
+              />
+            ))
+          )}
         </div>
       )}
-    </>
+
+      <AppendNote />
+    </div>
   );
 };

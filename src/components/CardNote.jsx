@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { FaFolderOpen, FaFolder } from "react-icons/fa";
 import parser from "html-react-parser";
 import PropTypes from "prop-types";
+import { archiveNote, unarchiveNote } from "../utils/network-data";
+import { useLocalization } from "../hooks/useLocalization";
+import { useContext } from "react";
+import { LocalizationContext } from "../contexts/LocalizationContext";
 
 export const CardNote = ({
   note,
@@ -16,7 +20,26 @@ export const CardNote = ({
   getArchivedNotes,
 }) => {
   const { id, title, body, createdAt } = note;
+  const { localization } = useContext(LocalizationContext)
   const navigate = useNavigate();
+  const text = useLocalization('card');
+  const language = localization === 'en' ? 'en-US' : 'id-ID';
+
+  const handleArchiveNote = async (id) => {
+    try {
+      await archiveNote(id);
+    } catch (error) {
+      throw new Error(`Error: ${error}`);
+    }
+  };
+
+  const handleUnArchiveNote = async (id) => {
+    try {
+      await unarchiveNote(id);
+    } catch (error) {
+      throw new Error(`Error: ${error}`);
+    }
+  };
 
   return (
     <>
@@ -37,7 +60,7 @@ export const CardNote = ({
             statusName={statusName}
           />
           <p className="flex my-2 self-end text-yellow-700">
-            {showFormattedDate(createdAt)}
+            {showFormattedDate(createdAt, language)}
           </p>
           <p className="text-justify">{parser(body)}</p>
           <button
@@ -49,11 +72,11 @@ export const CardNote = ({
             onClick={(event) => {
               event.stopPropagation();
               if (statusName === "note") {
-                onChangeArchiveStatus(id);
-                setData(getActiveNotes);
+                handleArchiveNote(id);
+                getActiveNotes();
               } else {
-                onChangeArchiveStatus(id);
-                setData(getArchivedNotes);
+                handleUnArchiveNote(id);
+                getArchivedNotes();
               }
             }}
           >
@@ -61,12 +84,12 @@ export const CardNote = ({
               {statusName === "note" ? (
                 <>
                   <FaFolder />
-                  <span className="px-2">Archive</span>
+                  <span className="px-2">{text.archive}</span>
                 </>
               ) : (
                 <>
                   <FaFolderOpen />
-                  <span className="px-2">Unarchive</span>
+                  <span className="px-2">{text.unarchive}</span>
                 </>
               )}
             </span>
