@@ -37,7 +37,7 @@ export const Append = () => {
       >
         <div className="my-5">
           <input
-            className="w-full text-xl p-3 rounded-md border-2 border-violet-200 dark:bg-primary-dark dark:text-white"
+            className="w-full text-xl p-3 rounded-xl border-2 border-violet-200 dark:bg-primary-dark dark:text-white"
             type="text"
             name="title"
             placeholder={text.titlePlaceholder}
@@ -49,7 +49,7 @@ export const Append = () => {
 
         <div>
           <div
-            className="w-full h-64 p-3 rounded-md border-2 border-violet-200 dark:text-white"
+            className="w-full h-64 p-3 rounded-xl border-2 border-violet-200 dark:text-white"
             placeholder={text.bodyPlaceholder}
             contentEditable
             onInput={(event) => {
@@ -58,7 +58,7 @@ export const Append = () => {
           />
         </div>
 
-        <button className="my-5 p-4 rounded-md group text-white bg-violet-600 hover:bg-gray-600 dark:bg-purple-dark dark:hover:bg-gray-600">
+        <button className="my-5 p-4 rounded-xl group text-white bg-violet-600 hover:bg-gray-600 dark:bg-purple-dark dark:hover:bg-gray-600">
           <span className="flex items-center text-white group-hover:text-yellow-400 ">
             <FaPlus className="mr-2" /> Add
           </span>

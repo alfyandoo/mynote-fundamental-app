@@ -74,7 +74,6 @@ export const Archive = () => {
                 key={index}
                 note={item}
                 statusName={statusName}
-                setData={setData}
                 getArchivedNotes={handleGetArchiveNotes}
               />
             ))

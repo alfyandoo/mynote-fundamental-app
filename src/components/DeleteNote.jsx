@@ -7,24 +7,15 @@ export const DeleteNote = ({
   id,
   getActiveNotes,
   getArchivedNotes,
-  setData,
   statusName,
 }) => {
   const handleDeleteNote = async (id) => {
     try {
       await deleteNote(id);
       if (statusName === "note") {
-        const { error, data } = await getActiveNotes();
-
-        if (!error) {
-          setData(data);
-        }
+        getActiveNotes();
       } else {
-        const { error, data } = await getArchivedNotes();
-
-        if (!error) {
-          setData(data);
-        }
+        getArchivedNotes();
       }
     } catch (error) {
       throw new Error(`Error: ${error}`);
@@ -48,7 +39,6 @@ export const DeleteNote = ({
 
 DeleteNote.propTypes = {
   id: PropTypes.string.isRequired,
-  setData: PropTypes.func.isRequired,
   getActiveNotes: PropTypes.func,
   getArchivedNotes: PropTypes.func,
   statusName: PropTypes.string.isRequired,

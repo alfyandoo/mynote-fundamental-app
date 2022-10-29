@@ -73,7 +73,6 @@ export const BaseNote = () => {
                 key={index}
                 note={item}
                 statusName={statusName}
-                setData={setData}
                 getActiveNotes={handleGetActiveNotes}
               />
             ))

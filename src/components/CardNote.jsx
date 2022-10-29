@@ -13,7 +13,6 @@ import { LocalizationContext } from "../contexts/LocalizationContext";
 export const CardNote = ({
   note,
   statusName,
-  setData,
   getActiveNotes,
   getArchivedNotes,
 }) => {
@@ -26,12 +25,7 @@ export const CardNote = ({
   const handleArchiveNote = async (id) => {
     try {
       await archiveNote(id);
-
-      const { error, data } = await getActiveNotes();
-
-      if (!error) {
-        setData(data);
-      }
+      getActiveNotes();
     } catch (error) {
       throw new Error(`Error: ${error}`);
     }
@@ -40,12 +34,7 @@ export const CardNote = ({
   const handleUnArchiveNote = async (id) => {
     try {
       await unarchiveNote(id);
-
-      const { error, data } = await getArchivedNotes();
-
-      if (!error) {
-        setData(data);
-      }
+      getArchivedNotes();
     } catch (error) {
       throw new Error(`Error: ${error}`);
     }
@@ -65,7 +54,6 @@ export const CardNote = ({
           </h1>
           <DeleteNote
             id={id}
-            setData={setData}
             getActiveNotes={getActiveNotes}
             getArchivedNotes={getArchivedNotes}
             statusName={statusName}
@@ -113,7 +101,6 @@ export const CardNote = ({
 CardNote.propTypes = {
   note: PropTypes.object.isRequired,
   statusName: PropTypes.string.isRequired,
-  setData: PropTypes.func.isRequired,
   getActiveNotes: PropTypes.func,
   getArchivedNotes: PropTypes.func,
 };
