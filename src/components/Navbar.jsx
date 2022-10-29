@@ -8,9 +8,8 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export const Navbar = () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
-  const { localization, toggleLocalization } = useContext(LocalizationContext);
+  const { toggleLocalization } = useContext(LocalizationContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
-  console.log(theme);
   const text = useLocalization("nav");
   const navigate = useNavigate();
 
@@ -30,13 +29,13 @@ export const Navbar = () => {
           <>
             <Link
               to={"/"}
-              className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
+              className="py-4 px-4 font-bold hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
             >
               {text.home}
             </Link>
             <Link
               to={"/archive"}
-              className="py-4 px-4 hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
+              className="py-4 px-4 font-bold hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
             >
               {text.archive}
             </Link>

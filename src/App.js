@@ -14,9 +14,17 @@ export const App = () => {
     localStorage.getItem("localization") || "id"
   );
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
+  console.log(theme);
   useEffect(() => {
     initialDataUser();
+
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.body.classList.add("dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      document.body.classList.remove("dark");
+    }
   }, []);
 
   const initialDataUser = async () => {
@@ -34,8 +42,14 @@ export const App = () => {
   const toggleTheme = () => {
     localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
     setTheme((prevState) => (prevState === "dark" ? "light" : "dark"));
-    if (theme === "dark") document.body.classList.remove("dark");
-    else document.body.classList.add("dark");
+
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "light");
+      document.body.classList.remove("dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.body.classList.add("dark");
+    }
   };
 
   const authContextValue = useMemo(

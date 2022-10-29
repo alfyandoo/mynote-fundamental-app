@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NoteNotFound } from "../components/NoteNotFound";
 import { DetailNote } from "../components/DetailNote";
 import { useState } from "react";
 import { getNote } from "../utils/network-data";
-import { useEffect } from "react";
 import { Loading } from "../components/Loading";
 
 export const Detail = () => {
@@ -21,7 +20,7 @@ export const Detail = () => {
     try {
       setLoading(true);
       const { error, data } = await getNote(id);
-      console.log(data);
+
       if (!error) {
         setData(data);
       }

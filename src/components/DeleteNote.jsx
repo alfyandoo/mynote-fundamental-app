@@ -7,11 +7,25 @@ export const DeleteNote = ({
   id,
   getActiveNotes,
   getArchivedNotes,
+  setData,
   statusName,
 }) => {
   const handleDeleteNote = async (id) => {
     try {
       await deleteNote(id);
+      if (statusName === "note") {
+        const { error, data } = await getActiveNotes();
+
+        if (!error) {
+          setData(data);
+        }
+      } else {
+        const { error, data } = await getArchivedNotes();
+
+        if (!error) {
+          setData(data);
+        }
+      }
     } catch (error) {
       throw new Error(`Error: ${error}`);
     }
@@ -20,16 +34,10 @@ export const DeleteNote = ({
   return (
     <>
       <button
-        className="absolute px-3 py-2 m-3 top-4 right-2 rounded-md group text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400"
+        className="absolute px-3 py-2 m-3 top-4 right-2 rounded-md group text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400 dark:bg-[#A91079] dark:hover:bg-gray-500"
         onClick={(event) => {
           event.stopPropagation();
-          if (statusName === "note") {
-            handleDeleteNote(id);
-            getActiveNotes();
-          } else {
-            handleDeleteNote(id);
-            getArchivedNotes();
-          }
+          handleDeleteNote(id);
         }}
       >
         <FaTrash />
@@ -40,7 +48,6 @@ export const DeleteNote = ({
 
 DeleteNote.propTypes = {
   id: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
   setData: PropTypes.func.isRequired,
   getActiveNotes: PropTypes.func,
   getArchivedNotes: PropTypes.func,

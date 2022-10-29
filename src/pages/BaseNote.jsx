@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { deleteNote, archiveNote } from "../utils/local-data";
 import { CardNote } from "../components/CardNote";
 import { SearchNote } from "../components/SearchNotes";
 import { useSearchParams } from "react-router-dom";
@@ -15,9 +14,7 @@ export const BaseNote = () => {
   const [statusName, setStatusName] = useState("");
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(data);
   const title = searchParams.get("title") || "";
-  console.log(title);
   const setSearchParamsHandler = (title) => {
     setSearchParams({ title });
   };
@@ -46,7 +43,9 @@ export const BaseNote = () => {
     try {
       setLoading(true);
       const { error, data } = await getActiveNotes();
+
       if (!error) {
+        console.count("getActiveNotes");
         setData(data);
         setInitialData(true);
       }
@@ -75,8 +74,6 @@ export const BaseNote = () => {
                 key={index}
                 note={item}
                 statusName={statusName}
-                onChangeArchiveStatus={archiveNote}
-                onDelete={deleteNote}
                 setData={setData}
                 getActiveNotes={handleGetActiveNotes}
               />

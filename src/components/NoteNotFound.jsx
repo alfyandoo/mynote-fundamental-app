@@ -6,7 +6,7 @@ export const NoteNotFound = ({ className }) => {
     <div className={className}>
       <div className="flex flex-col items-center">
         <span className="text-6xl mb-2">&#128531;</span>
-        <h2 className="text-3xl font-bold">Note not found</h2>
+        <h2 className="text-3xl font-bold dark:text-white">Note not found</h2>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { CardNote } from "../components/CardNote";
 import { SearchNote } from "../components/SearchNotes";
-import { deleteNote, unarchiveNote } from "../utils/local-data";
 import { useSearchParams } from "react-router-dom";
 import { NoteNotFound } from "../components/NoteNotFound";
 import { AppendNote } from "../components/AppendNote";
@@ -75,8 +74,6 @@ export const Archive = () => {
                 key={index}
                 note={item}
                 statusName={statusName}
-                onChangeArchiveStatus={unarchiveNote}
-                onDelete={deleteNote}
                 setData={setData}
                 getArchivedNotes={handleGetArchiveNotes}
               />
