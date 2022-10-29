@@ -60,7 +60,7 @@ export const Append = () => {
 
         <button className="my-5 p-4 rounded-xl group text-white bg-violet-600 hover:bg-gray-600 dark:bg-purple-dark dark:hover:bg-gray-600">
           <span className="flex items-center text-white group-hover:text-yellow-400 ">
-            <FaPlus className="mr-2" /> Add
+            <FaPlus className="mr-2" /> {text.submit}
           </span>
         </button>
       </form>

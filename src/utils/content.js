@@ -24,10 +24,12 @@ const input = {
   id: {
     titlePlaceholder: "Masukkan judul..",
     bodyPlaceholder: "Masukkan konten..",
+    submit: "Tambah",
   },
   en: {
     titlePlaceholder: "Input title..",
     bodyPlaceholder: "Input content..",
+    submit: "Add",
   },
 };
 
