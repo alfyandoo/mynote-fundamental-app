@@ -75,7 +75,7 @@ export const Register = () => {
           <div className="mb-5">
             <label
               className="block text-gray-700 text-sm font-bold mb-2 dark:text-white"
-              htmkFor="password"
+              htmlFor="password"
             >
               {text.password}
             </label>

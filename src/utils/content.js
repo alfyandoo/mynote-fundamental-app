@@ -96,6 +96,15 @@ const register = {
   },
 };
 
+const pageNotFound = {
+  id: {
+    message: "Halaman tidak ditemukan",
+  },
+  en: {
+    message: "Page not found",
+  },
+};
+
 export const content = {
   nav,
   card,
@@ -103,4 +112,5 @@ export const content = {
   search,
   login,
   register,
+  pageNotFound,
 };

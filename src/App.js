@@ -14,7 +14,7 @@ export const App = () => {
     localStorage.getItem("localization") || "id"
   );
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  console.log(theme);
+
   useEffect(() => {
     initialDataUser();
 

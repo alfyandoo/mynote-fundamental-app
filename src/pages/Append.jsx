@@ -33,8 +33,6 @@ export const Append = () => {
             title: title,
             body: body,
           });
-          setTitle("");
-          setBody("");
         }}
       >
         <div className="my-5">
@@ -60,7 +58,7 @@ export const Append = () => {
           />
         </div>
 
-        <button className="my-5 p-4 rounded-md group text-white bg-violet-600 hover:bg-gray-600 dark:bg-tertiary-dark">
+        <button className="my-5 p-4 rounded-md group text-white bg-violet-600 hover:bg-gray-600 dark:bg-purple-dark dark:hover:bg-gray-600">
           <span className="flex items-center text-white group-hover:text-yellow-400 ">
             <FaPlus className="mr-2" /> Add
           </span>

@@ -113,7 +113,6 @@ export const CardNote = ({
 CardNote.propTypes = {
   note: PropTypes.object.isRequired,
   statusName: PropTypes.string.isRequired,
-  onChangeArchiveStatus: PropTypes.func.isRequired,
   setData: PropTypes.func.isRequired,
   getActiveNotes: PropTypes.func,
   getArchivedNotes: PropTypes.func,

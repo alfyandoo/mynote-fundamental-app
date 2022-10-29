@@ -45,7 +45,6 @@ export const BaseNote = () => {
       const { error, data } = await getActiveNotes();
 
       if (!error) {
-        console.count("getActiveNotes");
         setData(data);
         setInitialData(true);
       }

@@ -4,7 +4,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import { LocalizationContext } from "../contexts/LocalizationContext";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useLocalization } from "../hooks/useLocalization";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export const Navbar = () => {
   const { authUser, setAuthUser } = useContext(AuthContext);
@@ -26,20 +25,20 @@ export const Navbar = () => {
 
       <div className="flex items-center">
         {authUser && (
-          <>
+          <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row">
             <Link
               to={"/"}
-              className="py-4 px-4 font-bold hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
+              className="py-4 px-4 font-semibold hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
             >
               {text.home}
             </Link>
             <Link
               to={"/archive"}
-              className="py-4 px-4 font-bold hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
+              className="py-4 px-4 font-semibold hover:bg-violet-600 hover:text-white dark:text-white rounded-md"
             >
               {text.archive}
             </Link>
-          </>
+          </div>
         )}
 
         <div>
