@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useInput } from "../hooks/useInput";
 import { useLocalization } from "../hooks/useLocalization";
@@ -12,8 +11,6 @@ export const Register = () => {
 
   const navigate = useNavigate();
   const text = useLocalization("register");
-
-  useEffect(() => {}, []);
 
   const signUp = async (newUser) => {
     const { error } = await register(newUser);
@@ -29,7 +26,7 @@ export const Register = () => {
         <h1 className="text-4xl font-bold dark:text-white">{text.title}</h1>
         <form
           className="mt-10"
-          onClick={(event) => {
+          onSubmit={(event) => {
             event.preventDefault();
             if (password === confirmPassword) {
               signUp({ name, email, password });
